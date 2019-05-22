@@ -10,6 +10,9 @@
 <script>
 import Tables from '_c/tables'
 import { getTableData } from '@/api/data'
+import tableform from './table-form'
+import { truncate } from 'fs';
+import { lookup } from 'dns';
 export default {
   name: 'tables_page',
   components: {
@@ -54,6 +57,38 @@ export default {
     },
     handleEdit (params) {
       console.log(params)
+      this.$Modal.confirm({
+        title: '第一个窗口',
+        render: h => {
+          return h(tableform, {
+            ref: 'tableform',
+            props: {
+              confirm: true,
+              item: {
+                input: '111test',
+                select: 'shanghai',
+                radio: 'female',
+                checkbox: ['吃饭','跑步'],
+                switch: true,
+                date: '2019-10-07',
+                time: '15:30:30',
+                slider: [10, 50],
+                textarea: '我是简介'
+              }
+            }
+          })
+        },
+        width: 600,
+        closable: false,
+        okText: '确定',
+        cancelText: '取消',
+        //loading: true,
+        onOk (param1,param2) {
+          console.log('测试OK')
+          console.log(param1)
+          console.log(param2)
+        }
+      })
     },
     exportExcel () {
       this.$refs.tables.exportCsv({
