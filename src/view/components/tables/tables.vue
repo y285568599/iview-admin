@@ -2,21 +2,56 @@
   <div>
     <Card>
       <tables ref="tables" editable searchable search-place="top" v-model="tableData" :columns="columns" @on-delete="handleDelete" @on-edit="handleEdit"/>
-      <Button style="margin: 10px 0;" type="primary" @click="exportExcel">导出为Csv文件</Button>
+      <div class="kk3">
+        <div class="kk"> 
+          <Button style="margin: 10px 0;" type="primary" @click="exportExcel">导出为Csv文件</Button>
+        </div>
+        <div class="kk2">
+          <Page :total="0" size="small" show-elevator show-sizer></Page>
+        </div>
+      </div>
     </Card>
   </div>
 </template>
+<style>
+ .dd
+ {
+   border: 1px solid red;
+   height: 100px;
+   width: 100%;
+ }
+ .kk
+ {
+   float: left;
+   height: 50px;
+   width: 50%;
+   /* border: 1px solid rgb(212, 209, 209); */
+ }
+ .kk2
+ {
+   float: right;
+   height: 50px;
+   width: 50%;
+   /* border: 1px solid rgb(0, 255, 128); */
+   line-height: 55px;
+   text-align: right;
+   padding-right: 10px;
+ }
+ .kk3
+ {
+   height: 50px;
+ }
+</style>
 
 <script>
 import Tables from '_c/tables'
 import { getTableData } from '@/api/data'
 import tableform from './table-form'
-import { truncate } from 'fs';
-import { lookup } from 'dns';
 export default {
   name: 'tables_page',
   components: {
-    Tables
+    Tables,
+    tableform
   },
   data () {
     return {
@@ -85,8 +120,8 @@ export default {
         //loading: true,
         onOk (param1,param2) {
           console.log('测试OK')
-          console.log(param1)
-          console.log(param2)
+          console.log(this.$refs.tableform.formItem)
+          console.log(this.$refs.tableform.formItem.textarea)
         }
       })
     },
